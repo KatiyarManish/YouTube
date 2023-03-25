@@ -3,8 +3,15 @@ import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import SideBar from "./SideBar";
 import Videos from "./Videos";
+import { fetchData } from "../utils/FetchDataFromApi";
 
 const Feed = () => {
+  const [selectedCategory, setselectedCategory] = useState("New");
+
+  useEffect(() => {
+    fetchData(`search?part=snippet&q=${selectedCategory}`);
+  }, [selectedCategory]);
+
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box
